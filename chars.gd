@@ -11,7 +11,6 @@ var direction
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-
 func movement(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -29,4 +28,23 @@ func movement(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 	move_and_slide()
+	if Input.is_action_just_pressed("normalAtk"):
+		if Input.is_action_pressed("left") or Input.is_action_pressed("right"):
+			fNorm()
+		if Input.is_action_pressed("down"):
+			dNorm()
+		if Input.is_action_pressed("up"):
+			uNorm()
+		nNorm()
 
+func nNorm():
+	pass
+
+func fNorm():
+	pass
+
+func uNorm():
+	pass
+
+func dNorm():
+	pass

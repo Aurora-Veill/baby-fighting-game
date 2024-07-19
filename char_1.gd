@@ -35,3 +35,6 @@ func _on_idle_anim_animation_finished(anim_name):
 
 func _on_walk_anim_animation_finished(anim_name):
 	sprite.set_frame(0)
+
+func nNorm():
+	print("jab")
