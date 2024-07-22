@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://043y43vu2xpl"]
 
-[ext_resource type="Texture2D" uid="uid://xmv3laxw7dgn" path="res://brackeys_platformer_assets/brackeys_platformer_assets/sprites/knight.png" id="1_83yv0"]
+[ext_resource type="Texture2D" uid="uid://cw33jga2spqui" path="res://brackeys_platformer_assets/brackeys_platformer_assets/sprites/knight.png" id="1_83yv0"]
 [ext_resource type="Script" path="res://char_1.gd" id="1_fty43"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1wvfv"]
@@ -77,7 +77,7 @@ shape = SubResource("RectangleShape2D_3j1me")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_83yv0")
 hframes = 8
-vframes = 8
+vframes = 10
 frame = 16
 
 [node name="WalkAnim" type="AnimationPlayer" parent="."]
