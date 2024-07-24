@@ -1,0 +1,83 @@
+[gd_scene load_steps=11 format=3 uid="uid://dsvaojwj5okwk"]
+
+[ext_resource type="Script" path="res://Char 2.gd" id="1_u0310"]
+[ext_resource type="Texture2D" uid="uid://6i6tua2ppdvf" path="res://icon.svg" id="2_tn4jl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xrnwn"]
+size = Vector2(46, 46)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_he4p8"]
+
+[sub_resource type="Animation" id="Animation_xy5xf"]
+resource_name = "walk"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iu3ds"]
+_data = {
+"walk": SubResource("Animation_xy5xf")
+}
+
+[sub_resource type="Animation" id="Animation_emj05"]
+resource_name = "idle"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_opa0s"]
+_data = {
+"idle": SubResource("Animation_emj05")
+}
+
+[sub_resource type="Animation" id="Animation_g8m4j"]
+resource_name = "nNorm"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0mhb0"]
+_data = {
+"nNorm": SubResource("Animation_g8m4j")
+}
+
+[node name="Char 2" type="CharacterBody2D" node_paths=PackedStringArray("WalkAnim", "IdleAnim", "AtkAnim", "sprite", "idlTimer", "hitbox")]
+script = ExtResource("1_u0310")
+weight = 1
+WalkAnim = NodePath("WalkAnim")
+IdleAnim = NodePath("IdleAnim")
+AtkAnim = NodePath("AtkAnim")
+sprite = NodePath("Sprite2D")
+idlTimer = NodePath("TilIdle")
+hitbox = NodePath("Area2D")
+controls = {
+"down": "down2",
+"jump": "jump2",
+"left": "left2",
+"normalAtk": "normalAtk2",
+"right": "right2",
+"up": "up2"
+}
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_tn4jl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, -2)
+shape = SubResource("RectangleShape2D_xrnwn")
+
+[node name="TilIdle" type="Timer" parent="."]
+one_shot = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_he4p8")
+disabled = true
+
+[node name="WalkAnim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_iu3ds")
+}
+
+[node name="IdleAnim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_opa0s")
+}
+
+[node name="AtkAnim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0mhb0")
+}

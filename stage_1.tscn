@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://flvutl64ja68"]
+[gd_scene load_steps=8 format=3 uid="uid://flvutl64ja68"]
 
 [ext_resource type="Texture2D" uid="uid://b2nyhwpuccbxl" path="res://brackeys_platformer_assets/brackeys_platformer_assets/sprites/platforms.png" id="1_33wde"]
 [ext_resource type="Texture2D" uid="uid://dw6jp034wa2if" path="res://brackeys_platformer_assets/brackeys_platformer_assets/sprites/world_tileset.png" id="2_eo67b"]
 [ext_resource type="PackedScene" uid="uid://043y43vu2xpl" path="res://char_1.tscn" id="3_ko6it"]
+[ext_resource type="PackedScene" uid="uid://dsvaojwj5okwk" path="res://char_2.tscn" id="4_m7yni"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ufup5"]
 texture = ExtResource("1_33wde")
@@ -468,3 +469,6 @@ layer_0/tile_data = PackedInt32Array(1966103, 1, 1, 1966104, 1, 1, 1966105, 1, 1
 
 [node name="Char 1" parent="." instance=ExtResource("3_ko6it")]
 position = Vector2(312, 302)
+
+[node name="Char 2" parent="." instance=ExtResource("4_m7yni")]
+position = Vector2(386, 251)

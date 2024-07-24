@@ -399,6 +399,13 @@ size = Vector2(0, 0)
 
 [node name="Char 1" type="CharacterBody2D" node_paths=PackedStringArray("WalkAnim", "IdleAnim", "AtkAnim", "sprite", "idlTimer", "hitbox")]
 script = ExtResource("1_fty43")
+nNormStats = {
+"baseKB": 500.0,
+"dir": Vector2(0, -1),
+"dmg": 5,
+"hitstun": 60,
+"kbScalar": 10.0
+}
 WalkAnim = NodePath("WalkAnim")
 IdleAnim = NodePath("IdleAnim")
 AtkAnim = NodePath("AtkAnim")
