@@ -20,6 +20,7 @@ var isAttacking = false
 var hitstun = 0
 var dmg = 0
 var hasHit = []
+var faceL = false
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -41,7 +42,6 @@ func movement(delta):
 		hitstun -= 1
 		move_and_slide()
 		if is_on_floor():
-			print("a")
 			velocity.x = move_toward(velocity.x, 0, speed)
 			hitstun = 0
 		return
@@ -73,11 +73,15 @@ func movement(delta):
 		if IdleAnim.is_playing():
 			IdleAnim.stop()
 	if direction > 0:
-		sprite.set_flip_h(false)
+		if faceL:
+			scale.x = -1
+		faceL = false
 		if !WalkAnim.is_playing():
 			WalkAnim.play("walk")
 	if direction < 0:
-		sprite.set_flip_h(true)
+		if !faceL:
+			scale.x = -1
+		faceL = true
 		if !WalkAnim.is_playing():
 			WalkAnim.play("walk")
 	if Input.is_action_just_pressed(controls["normalAtk"]):
@@ -131,5 +135,8 @@ func deal_hit(body_rid, body, body_shape_index, local_shape_index):
 	if !body.has_method("take_hit"):
 		return
 	if AtkAnim.get_current_animation() == "nNorm":
-		body.take_hit(nNormStats["dir"], nNormStats["baseKB"], nNormStats["kbScalar"], nNormStats["dmg"], nNormStats["hitstun"])
+		var tDir = nNormStats["dir"]
+		if faceL:
+			tDir.x = -tDir.x
+		body.take_hit(tDir, nNormStats["baseKB"], nNormStats["kbScalar"], nNormStats["dmg"], nNormStats["hitstun"])
 		hasHit.append(body)
