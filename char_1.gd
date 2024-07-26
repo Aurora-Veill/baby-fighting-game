@@ -10,3 +10,5 @@ func _physics_process(delta):
 func nNorm():
 	AtkAnim.play("nNorm")
 
+func dNorm():
+	AtkAnim.play("dNorm")

@@ -7,6 +7,13 @@ class_name chars
 @export var MAjump = -400.0
 @export var weight = 10
 @export var nNormStats = {"dir" : Vector2.ZERO, "baseKB" : 0.0, "kbScalar" : 0.0, "hitstun" : 0, "dmg" : 0}
+@export var dNormStats = {"dir" : Vector2.ZERO, "baseKB" : 0.0, "kbScalar" : 0.0, "hitstun" : 0, "dmg" : 0}
+@export var uNormStats = {"dir" : Vector2.ZERO, "baseKB" : 0.0, "kbScalar" : 0.0, "hitstun" : 0, "dmg" : 0}
+@export var fNormStats = {"dir" : Vector2.ZERO, "baseKB" : 0.0, "kbScalar" : 0.0, "hitstun" : 0, "dmg" : 0}
+@export var nAirStats = {"dir" : Vector2.ZERO, "baseKB" : 0.0, "kbScalar" : 0.0, "hitstun" : 0, "dmg" : 0}
+@export var dAirStats = {"dir" : Vector2.ZERO, "baseKB" : 0.0, "kbScalar" : 0.0, "hitstun" : 0, "dmg" : 0}
+@export var uAirStats = {"dir" : Vector2.ZERO, "baseKB" : 0.0, "kbScalar" : 0.0, "hitstun" : 0, "dmg" : 0}
+@export var fAirStats = {"dir" : Vector2.ZERO, "baseKB" : 0.0, "kbScalar" : 0.0, "hitstun" : 0, "dmg" : 0}
 @export var WalkAnim : AnimationPlayer
 @export var IdleAnim : AnimationPlayer
 @export var AtkAnim : AnimationPlayer
@@ -85,17 +92,32 @@ func movement(delta):
 		if !WalkAnim.is_playing():
 			WalkAnim.play("walk")
 	if Input.is_action_just_pressed(controls["normalAtk"]):
-		if Input.is_action_pressed(controls["left"]) or Input.is_action_pressed(controls["right"]):
-			fNorm()
-		if Input.is_action_pressed(controls["down"]):
-			dNorm()
-		if Input.is_action_pressed(controls["up"]):
-			uNorm()
-		nNorm()
 		isAttacking = true
 		WalkAnim.stop()
 		IdleAnim.stop()
 		idlTimer.stop()
+		if is_on_floor():
+			if Input.is_action_pressed(controls["left"]) or Input.is_action_pressed(controls["right"]):
+				fNorm()
+				return
+			if Input.is_action_pressed(controls["down"]):
+				dNorm()
+				return
+			if Input.is_action_pressed(controls["up"]):
+				uNorm()
+				return
+			nNorm()
+			return
+		if Input.is_action_pressed(controls["left"]) or Input.is_action_pressed(controls["right"]):
+			fAir()
+			return
+		if Input.is_action_pressed(controls["down"]):
+			dAir()
+			return
+		if Input.is_action_pressed(controls["up"]):
+			uAir()
+			return
+		nAir()
 
 func _on_til_idle_timeout():
 	IdleAnim.play("idle")
@@ -111,16 +133,28 @@ func _on_atk_anim_animation_finished(anim_name):
 	hasHit = []
 
 func nNorm():
-	pass
+	isAttacking = false
 
 func fNorm():
-	pass
+	isAttacking = false
 
 func uNorm():
-	pass
+	isAttacking = false
 
 func dNorm():
-	pass
+	isAttacking = false
+	
+func nAir():
+	isAttacking = false
+
+func fAir():
+	isAttacking = false
+
+func uAir():
+	isAttacking = false
+
+func dAir():
+	isAttacking = false
 
 func take_hit(dir : Vector2, baseKB, kbScalar, Dmg, Hitstun):
 	hitstun = Hitstun
@@ -134,9 +168,25 @@ func deal_hit(body_rid, body, body_shape_index, local_shape_index):
 		return
 	if !body.has_method("take_hit"):
 		return
+	var atkStats
 	if AtkAnim.get_current_animation() == "nNorm":
-		var tDir = nNormStats["dir"]
-		if faceL:
-			tDir.x = -tDir.x
-		body.take_hit(tDir, nNormStats["baseKB"], nNormStats["kbScalar"], nNormStats["dmg"], nNormStats["hitstun"])
-		hasHit.append(body)
+		atkStats = nNormStats
+	elif AtkAnim.get_current_animation() == "dNorm":
+		atkStats = dNormStats
+	elif AtkAnim.get_current_animation() == "uNorm":
+		atkStats = uNormStats
+	elif AtkAnim.get_current_animation() == "fNorm":
+		atkStats = fNormStats
+	if AtkAnim.get_current_animation() == "nAir":
+		atkStats = nAirStats
+	elif AtkAnim.get_current_animation() == "dAir":
+		atkStats = dAirStats
+	elif AtkAnim.get_current_animation() == "uAir":
+		atkStats = uAirStats
+	elif AtkAnim.get_current_animation() == "fAir":
+		atkStats = fAirStats
+	var tDir = atkStats["dir"]
+	if faceL:
+		tDir.x = -tDir.x
+	body.take_hit(tDir, atkStats["baseKB"], atkStats["kbScalar"], atkStats["dmg"], atkStats["hitstun"])
+	hasHit.append(body)
