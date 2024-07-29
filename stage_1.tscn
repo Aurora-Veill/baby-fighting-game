@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://flvutl64ja68"]
+[gd_scene load_steps=9 format=3 uid="uid://flvutl64ja68"]
 
 [ext_resource type="Texture2D" uid="uid://b2nyhwpuccbxl" path="res://brackeys_platformer_assets/brackeys_platformer_assets/sprites/platforms.png" id="1_33wde"]
 [ext_resource type="Texture2D" uid="uid://dw6jp034wa2if" path="res://brackeys_platformer_assets/brackeys_platformer_assets/sprites/world_tileset.png" id="2_eo67b"]
 [ext_resource type="PackedScene" uid="uid://043y43vu2xpl" path="res://char_1.tscn" id="3_ko6it"]
 [ext_resource type="PackedScene" uid="uid://dsvaojwj5okwk" path="res://char_2.tscn" id="4_m7yni"]
+[ext_resource type="PackedScene" uid="uid://pcedc72dl28s" path="res://info.tscn" id="5_wdkjq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ufup5"]
 texture = ExtResource("1_33wde")
@@ -472,3 +473,18 @@ position = Vector2(445, 383)
 
 [node name="Char 2" parent="." instance=ExtResource("4_m7yni")]
 position = Vector2(481, 373)
+
+[node name="Info" parent="." node_paths=PackedStringArray("p1", "p2") instance=ExtResource("5_wdkjq")]
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 432.0
+offset_top = 243.0
+offset_right = 432.0
+offset_bottom = 243.0
+grow_horizontal = 1
+grow_vertical = 1
+p1 = NodePath("../Char 1")
+p2 = NodePath("../Char 2")

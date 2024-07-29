@@ -12,3 +12,6 @@ func nNorm():
 
 func dNorm():
 	AtkAnim.play("dNorm")
+
+func uNorm():
+	AtkAnim.play("uNorm")

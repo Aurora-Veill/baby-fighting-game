@@ -159,7 +159,7 @@ func dAir():
 func take_hit(dir : Vector2, baseKB, kbScalar, Dmg, Hitstun):
 	hitstun = Hitstun
 	velocity = dir.normalized() * (baseKB + (kbScalar * dmg)) / weight
-	dmg += dmg
+	dmg += Dmg
 
 func deal_hit(body_rid, body, body_shape_index, local_shape_index):
 	if body == self:
