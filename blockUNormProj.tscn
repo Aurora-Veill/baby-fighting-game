@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://c74jt71kkfuha"]
+
+[ext_resource type="Script" path="res://projectile.gd" id="1_kwu7p"]
+[ext_resource type="Texture2D" uid="uid://defg7nwui1byd" path="res://blockUNormproj.png" id="2_f1w6n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uusvm"]
+size = Vector2(4, 4)
+
+[node name="projectile" type="Node2D"]
+script = ExtResource("1_kwu7p")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_f1w6n")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_uusvm")
+
+[connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]

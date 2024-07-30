@@ -53,7 +53,6 @@ func movement(delta):
 			hitstun = 0
 		return
 	if isAttacking:
-		velocity.x = move_toward(velocity.x, 0, speed)
 		move_and_slide()
 		return
 	if direction:
