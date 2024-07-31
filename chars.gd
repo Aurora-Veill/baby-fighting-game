@@ -28,6 +28,8 @@ var hitstun = 0
 var dmg = 0
 var hasHit = []
 var faceL = false
+var aMoveX = 0
+var aMoveY = 0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -53,6 +55,12 @@ func movement(delta):
 			hitstun = 0
 		return
 	if isAttacking:
+		if aMoveX != 0:
+			velocity.x = aMoveX
+			if faceL:
+				velocity.x *= -1
+		if aMoveY != 0:
+			velocity.y = aMoveY
 		move_and_slide()
 		return
 	if direction:
@@ -189,3 +197,10 @@ func deal_hit(body_rid, body, body_shape_index, local_shape_index):
 		tDir.x = -tDir.x
 	body.take_hit(tDir, atkStats["baseKB"], atkStats["kbScalar"], atkStats["dmg"], atkStats["hitstun"])
 	hasHit.append(body)
+
+func setAMove(vec : Vector2):
+	aMoveX = vec.x
+	aMoveY = vec.y
+
+func setVel(vel : Vector2):
+	velocity = vel

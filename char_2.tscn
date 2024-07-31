@@ -39,7 +39,7 @@ IdleAnim = NodePath("IdleAnim")
 AtkAnim = NodePath("AtkAnim")
 sprite = NodePath("Sprite2D")
 idlTimer = NodePath("TilIdle")
-hitbox = NodePath("Area2D")
+hitbox = NodePath("hitbox")
 controls = {
 "down": "down2",
 "jump": "jump2",
@@ -60,9 +60,11 @@ shape = SubResource("RectangleShape2D_xrnwn")
 [node name="TilIdle" type="Timer" parent="."]
 one_shot = true
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="hitbox" type="Area2D" parent="."]
+collision_layer = 15
+collision_mask = 15
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
 shape = SubResource("CircleShape2D_he4p8")
 disabled = true
 

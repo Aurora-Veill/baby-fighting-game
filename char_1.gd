@@ -17,6 +17,12 @@ func dNorm():
 func uNorm():
 	AtkAnim.play("uNorm")
 
+func fNorm():
+	AtkAnim.play("fNorm")
+
+func nAir():
+	AtkAnim.play("nAir")
+
 func uNormProj():
 	var proj = uProj.instantiate()
 	proj.parent = self
