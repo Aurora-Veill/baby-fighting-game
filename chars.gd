@@ -30,6 +30,7 @@ var hasHit = []
 var faceL = false
 var aMoveX = 0
 var aMoveY = 0
+var gravOn = true
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -43,7 +44,8 @@ func on_ready():
 
 func movement(delta):
 	if not is_on_floor():
-		velocity.y += gravity * delta
+		if gravOn:
+			velocity.y += gravity * delta
 	else:
 		MIJumps = MaxMIJumps
 	direction = Input.get_axis(controls["left"], controls["right"])
@@ -66,7 +68,10 @@ func movement(delta):
 	if direction:
 		velocity.x = direction * speed
 	else:
-		velocity.x = move_toward(velocity.x, 0, speed)
+		if is_on_floor():
+			velocity.x = move_toward(velocity.x, 0, speed)
+		else:
+			velocity.x = move_toward(velocity.x, 0, speed/10)
 	if Input.is_action_just_pressed(controls["jump"]):
 		if is_on_floor():
 			velocity.y = jump
@@ -204,3 +209,12 @@ func setAMove(vec : Vector2):
 
 func setVel(vel : Vector2):
 	velocity = vel
+
+func setGrav(on : bool):
+	gravOn = on
+
+func setXVel(vel : float):
+	velocity.x = vel
+
+func setYVel(vel : float):
+	velocity.y = vel

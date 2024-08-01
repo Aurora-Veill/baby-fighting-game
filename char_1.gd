@@ -22,6 +22,12 @@ func fNorm():
 
 func nAir():
 	AtkAnim.play("nAir")
+	
+func fAir():
+	AtkAnim.play("fAir")
+
+func dAir():
+	AtkAnim.play("dAir")
 
 func uNormProj():
 	var proj = uProj.instantiate()

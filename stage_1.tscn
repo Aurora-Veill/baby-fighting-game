@@ -457,15 +457,18 @@ texture = ExtResource("2_eo67b")
 3:15/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSet" id="TileSet_24arf"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 3
+physics_layer_0/collision_mask = 3
 sources/0 = SubResource("TileSetAtlasSource_ufup5")
 sources/1 = SubResource("TileSetAtlasSource_aj4dj")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wnn1c"]
 size = Vector2(864, 486)
 
-[node name="Stage 1" type="Node2D"]
+[node name="Stage 1" type="Node2D" node_paths=PackedStringArray("p1", "p2")]
 script = ExtResource("1_xy1fq")
+p1 = NodePath("Char 1")
+p2 = NodePath("Char 2")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_24arf")
@@ -502,6 +505,8 @@ p1 = NodePath("../Char 1")
 p2 = NodePath("../Char 2")
 
 [node name="BlastZone" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BlastZone"]
 position = Vector2(432, 243)
