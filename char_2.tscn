@@ -33,6 +33,7 @@ _data = {
 }
 
 [node name="Char 2" type="CharacterBody2D" node_paths=PackedStringArray("WalkAnim", "IdleAnim", "AtkAnim", "sprite", "idlTimer", "hitbox")]
+collision_mask = 3
 script = ExtResource("1_u0310")
 WalkAnim = NodePath("WalkAnim")
 IdleAnim = NodePath("IdleAnim")

@@ -29,6 +29,9 @@ func fAir():
 func dAir():
 	AtkAnim.play("dAir")
 
+func uAir():
+	AtkAnim.play("uAir")
+
 func uNormProj():
 	var proj = uProj.instantiate()
 	proj.parent = self
